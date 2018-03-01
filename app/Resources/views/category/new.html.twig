@@ -1,0 +1,19 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-6 col-md-offset-3">
+
+        {{ form_start(form, {'method': 'post', 'action': path('category_new'), 'attr': {'class': 'form-signin fos_user_registration_register'}}) }}
+        <h3 class="text-center">New Group</h3>
+
+        <div class="form-group">
+            {{ form_row(form.name, { 'attr' : { 'class': 'form-control' } }) }}
+        </div>
+        <div>
+            <input class="btn btn-success btn-block" type="submit" value="Create" />
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

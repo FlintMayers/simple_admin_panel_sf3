@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+
+        <h3 class="text-center">All users</h3>
+        <div class="text-center">
+            <a class="btn btn-primary btn-sm" href="{{ path('user_new') }}">Add new</a>
+        </div>
+    </div>
+
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Groups User In</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</a></td>
+                <td>{{ user.name }}</td>
+                <th>{{ user.categories | length }}</th>
+                <td>
+                    <a class="btn btn-success btn-xs" href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                    <a class="btn btn-info btn-xs" href="{{ path('user_group_list', { 'id': user.id }) }}">Manage user groups</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

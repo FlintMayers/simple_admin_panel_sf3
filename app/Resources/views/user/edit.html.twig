@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="col-md-6 col-md-offset-3">
+
+        {{ form_start(edit_form) }}
+
+            <h3 class="text-center">Update user</h3>
+
+            <div class="form-group">
+                {{ form_row(edit_form.name, { 'attr' : { 'class': 'form-control' } }) }}
+            </div>
+            <div>
+                <input class="btn btn-success btn-block" type="submit" value="Update" />
+            </div>
+
+        {{ form_end(edit_form) }}
+
+        <hr>
+
+        <div class="col-md-6 col-md-offset-3">
+            {{ form_start(delete_form) }}
+            <input class="btn btn-danger btn-block" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </div>
+
+        <br>
+    </div>
+{% endblock %}

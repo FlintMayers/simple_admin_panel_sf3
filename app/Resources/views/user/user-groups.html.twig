@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <h3 class="text-center">Groups {{ user.name }} is part of</h3>
+            </div>
+
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in userCategories %}
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <a href="#"
+                               class="btn btn-danger btn-xs js-remove-user-category"
+                               data-url="{{ path('user_category_remove', {
+                                   userId: user.id,
+                                   categoryId: category.id
+                               }) }}"
+                            >
+                                Remove
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <h3 class="text-center">Groups {{ user.name }} is not part of</h3>
+            </div>
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categoriesUserNotIn %}
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <a href="#"
+                               class="btn btn-success btn-xs js-add-user-category"
+                               data-url="{{ path('user_category_add', {
+                                   userId: user.id,
+                                   categoryId: category.id
+                               }) }}"
+                            >
+                                Add
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-remove-user-category').on('click', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).data('url'),
+                    method: 'DELETE',
+                }).done(function() {
+                    location.reload();
+                });
+            });
+            $('.js-add-user-category').on('click', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).data('url'),
+                    method: 'POST',
+                }).done(function() {
+                    location.reload();
+                });
+            });
+        });
+    </script>
+{% endblock %}
